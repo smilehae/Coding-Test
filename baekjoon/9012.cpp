@@ -93,6 +93,54 @@ int main(){
                 }
                 
             }
+            else if(testset[count]=='['){
+                st.push('[');
+                //puts("pushed ( ");
+            }
+            else if(testset[count] ==']'){
+                //뺄것이 없음 짝 안맞음
+                if(st.empty()==true){
+                    ans.push_back(0); //NO
+                   // puts("there's more )");
+                    break;
+                }
+                // 가장 겉에 것이랑 짝 안맞음
+                if(st.top()!='['){
+                    ans.push_back(0);
+                   // puts("not matching");
+                    break;
+                }
+                //짝 맞음 : 하나 빼고 다시 확인
+                else{
+                    st.pop();
+                   // puts("poped (");
+                }
+                
+            }
+            else if(testset[count]=='{'){
+                st.push('{');
+                //puts("pushed ( ");
+            }
+            else if(testset[count] =='}'){
+                //뺄것이 없음 짝 안맞음
+                if(st.empty()==true){
+                    ans.push_back(0); //NO
+                   // puts("there's more )");
+                    break;
+                }
+                // 가장 겉에 것이랑 짝 안맞음
+                if(st.top()!='{'){
+                    ans.push_back(0);
+                   // puts("not matching");
+                    break;
+                }
+                //짝 맞음 : 하나 빼고 다시 확인
+                else{
+                    st.pop();
+                   // puts("poped (");
+                }
+                
+            }
 
             count++;
         }   
