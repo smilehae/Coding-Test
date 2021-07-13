@@ -31,7 +31,7 @@ top을 봤을때 값이 같으면 pop
 
 using namespace std;
 
-char ans[100001];
+char ans[200001];
 
 int main(){
     int count=0;
@@ -43,15 +43,11 @@ int main(){
     stack<int> st;
     st.push(1);
      ans[count++] = '+';
-     
+
     scanf("%d",&num);
     for(int i=0;i<num;i++){
         scanf("%d",&value);
-        //printf("current value : %d\n",value);
-       // if(st.empty()==false) printf("top : %d\n",st.top());
-        // else{
-        //   //  puts("stack is now empty");
-        // }
+    
         while(1){
             if(st.empty()==true){
                  st.push(++mainNum);
