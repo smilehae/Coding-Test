@@ -27,7 +27,7 @@ Queue의 특징
 using namespace std;
 
 vector<int>myprogress={93, 30, 55};
-vector<int>myspeed={1, 30,5};
+vector<int>myspeed={1,30,5};
 vector<int>myanswer;
 
 vector<int> solution(vector<int> progresses, vector<int> speeds) {
@@ -38,28 +38,57 @@ vector<int> solution(vector<int> progresses, vector<int> speeds) {
     //2.3일 이런식으로 걸리면- >3일 걸림으로 바꿔줌 : ceil이용
     for(int i=0;i<progresses.size();i++){
         days = ceil((double)(100-progresses[i])/(double)speeds[i]);
-        cout<<days<<endl;
+       // cout<<days<<endl;
         
         if(myqueue.empty()==true){
-            cout<<"this queue is empty. pushing "<<days<<endl;
+           // cout<<"this queue is empty. pushing "<<days<<endl;
             myqueue.push(days);
         }
         else{
             if(myqueue.back()> days){
-                cout<<"back is bigger than 'days'. so pushing back again"<<endl;
+               // cout<<"back is bigger than 'days'. so pushing back again"<<endl;
                 myqueue.push(myqueue.back());
             }
             else{
-                cout<<"my 'days' is bigger than back. pushing my 'days'"<<endl;
+               // cout<<"my 'days' is bigger than back. pushing my 'days'"<<endl;
                 myqueue.push(days);
             }
         }
 
     }
+   
+    int count = 1;
+    int day = 0;
 
-    for(int i=0;i<myqueue.size();i++){
-        cout<<myqueue.front()<<" ";
+    while(myqueue.empty()==false){
+        //가장 처음 값이 들어옴 -> 이거의 값을 셀 거임
+      //  cout<<"queue front value : "<<myqueue.front()<<endl;
+
+        if(day==0){
+            day = myqueue.front();
+          //  cout<<"day is "<<day<<endl;
+        }
+        else{
+            if(day == myqueue.front()){
+                count++;
+              //  cout<<count<<" things finishes in day "<<day<<endl;
+
+            }
+            else{
+                answer.push_back(count);
+             //   cout<<"pushing back "<<count<<" to answer"<<endl;
+                day = myqueue.front();
+                count = 1;
+              //  cout<<"this can be finished in day "<<day<<endl;
+            }
+        }
         myqueue.pop();
+    }
+    answer.push_back(count);
+ //   cout<<"pushing back "<<count<<" to answer"<<endl;
+    
+    for(int i=0;i<answer.size();i++){
+        cout<<answer[i]<< " ";
     }
     return answer;
 }
