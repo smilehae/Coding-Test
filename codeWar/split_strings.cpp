@@ -9,32 +9,25 @@
 
 using namespace std;
 
+
 std::vector<std::string> solution(const std::string &s)
 {
   vector<string> answer = {};
   string mystring = s;
-  string::iterator it = mystring.begin();
-  string substring="";
+  string substring = "";
   
   //만약 string이 홀수면 마지막에 -를 넣어야 한다고 표시
-  if(mystring.size()%2==1){
-    mystring.append("-");
+  if(mystring.size()%2 == 1){
+    mystring.append("_");
   }
-
-  for(it=mystring.begin();it!=mystring.end();it+=2){
-     
-      cout<<*it<<endl;
+  for(int i=0;i<(int)mystring.size();i+=2){
+    substring = mystring.substr(i,2);
+    answer.push_back(substring);
   }
-
-  answer.push_back(mystring);
-  answer.push_back("hoho");
-
-    return answer; // Your code here
+  
+  return answer;
 }
 
 int main(){
-  vector<string> myanswer = solution("abc");
-  for(int i=0;i<myanswer.size();i++){
-    cout<<myanswer[i]<<endl;
-  }
+  solution("haha");
 }
