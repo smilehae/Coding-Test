@@ -4,23 +4,29 @@
 using namespace std;
 
 int main(){
-   int arr[3];
-   int money;
-   scanf("%d %d %d",&arr[0],&arr[1],&arr[2]);
+   int arr[4];
+   int count;
 
-   sort(arr,arr+3);
-
-   if(arr[0]==arr[1] && arr[1]==arr[2]){
-       money = 10000 + arr[0]*1000;
-   }
-   else if(arr[0] == arr[1] || arr[1]==arr[2]){
-       money = 1000 + arr[1]*100;
-   }
-   else{
-       money = arr[2]*100;
-   }
-
-
-    printf("%d",money);
+  for(int i=1;i<=3;i++){
+    scanf("%d %d %d %d",&arr[0],&arr[1],&arr[2],&arr[3]);
+    count = arr[0]+arr[1]+arr[2]+arr[3];
+    switch(count){
+    case 0: 
+        puts("D");
+        break;
+    case 1:
+        puts("C");
+        break;
+     case 2:
+        puts("B");
+        break;       
+    case 3:
+        puts("A");
+        break;
+    case 4:
+        puts("E");
+        break;
+    }
+  }
 
 }
