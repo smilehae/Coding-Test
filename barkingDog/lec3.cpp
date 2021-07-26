@@ -11,8 +11,8 @@ void insert(int idx, int num, int arr[], int& len){
 }
 
 void erase(int idx, int arr[], int& len){
-  for(int i=len-1;i<=idx;i--){
-      arr[i] = arr[i-1];
+  for(int i=idx+1;i<len;i++){
+      arr[i-1] = arr[i];
   }
   len -=1;
 
