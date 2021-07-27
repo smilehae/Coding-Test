@@ -23,19 +23,46 @@ int main(){
         scanf("%s",str2);
 
     //방법1. string으로 바꾸고 algorithm으로 sort, str1.compare(str2)로 확인
-        string st1(str1);
-        string st2(str2);
+    //     string st1(str1);
+    //     string st2(str2);
 
 
-        std::sort(st1.begin(),st1.begin()+st1.size());
-        std::sort(st2.begin(),st2.begin()+st2.size());
-        if(st1.compare(st2)==0){
-            printf("Possible\n");
-        }
-        else{
-            printf("Impossible\n");
-        }
+    //     std::sort(st1.begin(),st1.begin()+st1.size());
+    //     std::sort(st2.begin(),st2.begin()+st2.size());
+    //     if(st1.compare(st2)==0){
+    //         printf("Possible\n");
+    //     }
+    //     else{
+    //         printf("Impossible\n");
+    //     }
+    // }
+
+    //방법 2. 알파벳 넣는 배열 찾아서 확인
+    int alpha1[26]={};
+    int alpha2[26]={};
+
+    int count = 0;
+    while(str1[count]!=0){
+        alpha1[str1[count]-'a']++;
+        count++;
+    }
+    count = 0;
+    while(str2[count]!=0){
+        alpha2[str2[count]-'a']++;
+        count++;
     }
 
+    bool isSame= true;
+    for(int i=0;i<26;i++){
+        if(alpha1[i]!=alpha2[i]) isSame = false;
+    }
+
+    if(isSame){
+    printf("Possible\n");
+    }
+    else{
+        printf("Impossible\n");
+    }
     
+    }
 }
