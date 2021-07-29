@@ -13,7 +13,7 @@ using namespace std;
 list<char> L;
 
 int main(){
-    char initString[10001]={};
+    char initString[100001]={};
     int m;
     list<char>::iterator it;
     scanf("%s",initString);
@@ -34,20 +34,20 @@ int main(){
         if(order=='L'){
             if(it!=L.begin()){
                 it--;
-                printf("moving left! it's pointing %c\n",*it);
+             //   printf("moving left! it's pointing %c\n",*it);
             }
             else{
-                printf("it's already at begin!\n");
+              //  printf("it's already at begin!\n");
             }
         }
         else if(order=='D'){
             //end가기 전까지만 이동가능!!
             if(it!=(L.end())){
                 it++;
-                printf("moving right! it's pointing %c\n",*it);
+               // printf("moving right! it's pointing %c\n",*it);
             }
             else{
-                printf("it's already at the end!\n");
+               // printf("it's already at the end!\n");
             }
         }
         else if(order=='P'){
@@ -55,29 +55,29 @@ int main(){
             scanf("%c",&newWord);
             getchar();
             L.insert(it,newWord);
-            printf("now became ");
-            for(char c:L){
-                printf("%c ",c);
-            }
-            puts("");
+          //  printf("now became ");
+            // for(char c:L){
+            //     printf("%c ",c);
+            // }
+            // puts("");
         }
         else if(order=='B'){
-            printf("position : %c\n",*it);
+            //printf("position : %c\n",*it);
             if(it!=L.begin()){
-                 printf("erased %c \n",*it);
+               //  printf("erased %c \n",*it);
                  list<char>::iterator it2;
                  it2 = it;
                 L.erase(prev(it2));
                 
-                 printf("now became ");
-                 for(char c:L){
-                     printf("%c ",c);
-                  }
-            puts("");
-            printf("iterator is pointing %c\n",*it);
-            }
-            else{
-                printf("it's already begin \n");
+            //      printf("now became ");
+            //      for(char c:L){
+            //          printf("%c ",c);
+            //       }
+            // puts("");
+            // printf("iterator is pointing %c\n",*it);
+            // }
+            // else{
+            //     printf("it's already begin \n");
             }
            
         }
@@ -85,7 +85,7 @@ int main(){
     }
 
     for(char c:L){
-        printf("%c ",c);
+        printf("%c",c);
     }
 
 
