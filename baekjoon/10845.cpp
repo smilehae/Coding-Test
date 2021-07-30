@@ -1,51 +1,56 @@
-#include<cstdio>
+#include<iostream>
 #include<queue>
-#include<cstring>
+#include<string>
 
+using namespace std;
 
 int main(){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
     int n;
     std::queue<int> Q;    
-    scanf("%d",&n);
+    cin>>n;
     for(int i=0;i<n;i++){
-        char order[10];
-        scanf("%s",order);
-        if(strcmp(order,"push")==0){
+        string order;
+        cin>>order;
+        if(order.compare("push")==0){
             int number;
-           scanf("%d",&number);
+           cin>>number;
             Q.push(number);
         }
-        else if(strcmp(order,"pop")==0){
+        else if(order=="pop"){
             if(Q.empty()){
-                puts("-1");
+                cout<<"-1"<<"\n";
             }
             else{
-                printf("%d\n",Q.front());
+               cout<<Q.front()<<"\n";
                 Q.pop();
             }
         }
-        else if(strcmp(order,"size")==0){
-            printf("%d\n",Q.size());
+        else if(order.compare("size")==0){
+            cout<<Q.size()<<"\n";
         }
-        else if(strcmp(order,"front")==0){
+        else if(order.compare("front")==0){
             if(Q.empty()){
-                puts("-1");
+                cout<<"-1"<<"\n";
             }
             else{
-              printf("%d\n",Q.front());
+             cout<<Q.front()<<"\n";
             }
         }
-         else if(strcmp(order,"back")==0){
+         else if(order=="back"){
             if(Q.empty()){
-                puts("-1");
+                cout<<"-1"<<"\n";
             }
             else{
-              printf("%d\n",Q.back());
+              cout<<Q.back()<<"\n";
             }
         }
-        else if(strcmp(order,"empty")==0){
-            if(Q.empty())puts("1");
-            else puts("0");
+        else if(order=="empty"){
+            if(Q.empty()) cout<<"1"<<"\n";
+
+            else   cout<<"0"<<"\n";
         }
 
     }
