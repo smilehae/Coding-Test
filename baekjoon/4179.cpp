@@ -6,6 +6,7 @@
 using namespace std;
 
 queue<pair<int,int>> Q;
+queue<pair<int,int>> Q2;
 
 int board[1002][1002];
 int fire[1002][1002];
@@ -23,8 +24,8 @@ int main(){
     cin>>r>>c;
 
     for(int i=0;i<r;i++){
-        fill(fire[i],fire[i]+r,-1);
-        fill(escape[i],escape[i]+r,-1);
+        fill(fire[i],fire[i]+c,-1);
+        fill(escape[i],escape[i]+c,-1);
         
     }
 
@@ -49,8 +50,8 @@ int main(){
                 
             }
             else if(place=='F'){
-                firePos.first=i;
-                firePos.second=j;
+                fire[j][i]=0;
+                Q2.push(make_pair(i,j));
             }
         }
     }
@@ -59,18 +60,16 @@ int main(){
     // printf("fire is in (%d,%d)\n",firePos.first,firePos.second);
 
     //fire bfs돌리기
-    fire[firePos.second][firePos.first]=0;
-    Q.push(firePos);
-    while(!Q.empty()){
-        pair<int,int>cur=Q.front();Q.pop();
+    while(!Q2.empty()){
+        pair<int,int>cur=Q2.front();Q2.pop();
         for(int i=0;i<4;i++){
             int nx = cur.first+dx[i];
             int ny = cur.second+dy[i];
             if(nx<0||nx>=c||ny<0||ny>=r) continue;
             if(board[ny][nx]==-1||fire[ny][nx]!=-1 ) continue;
             fire[ny][nx] = fire[cur.second][cur.first]+1;
-          //  printf("visiting (%d,%d), pos %d\n",nx,ny,fire[ny][nx]);
-            Q.push(make_pair(nx,ny));
+        //   printf("visiting (%d,%d), pos %d\n",nx,ny,fire[ny][nx]);
+            Q2.push(make_pair(nx,ny));
         }
 
     }
@@ -86,23 +85,39 @@ puts("");
     Q.push(startPos);
     while(!Q.empty()){
         pair<int,int>cur=Q.front();Q.pop();
+       // cout<<"poped ("<<cur.first<<","<<cur.second<<")\n";
         for(int i=0;i<4;i++){
             int nx = cur.first+dx[i];
             int ny = cur.second+dy[i];
             //범위 벗어나면 스캅
-            if(nx<0||nx>=c||ny<0||ny>=r) continue;
+            if(nx<0||nx>=c||ny<0||ny>=r) {
+               // cout<<"out of range"<<"\n";
+                continue;
+            }
             //벽이거나, 이미 가본 곳이면 스킵
-            if(board[ny][nx]==-1||escape[ny][nx]!=-1 ) continue;
+            if(board[ny][nx]==-1){
+              //  cout<<"it's rock ("<<nx<<","<<ny<<")\n";
+                continue;
+            } 
+             if(escape[ny][nx]!=-1 ){
+              //  cout<<"already visited ("<<nx<<","<<ny<<")\n";
+                continue;
+            } 
             //만약 불이 올 수 있는 곳이면, 불이 오는 타이밍이 탈출시점보다 빠르면 스킵
             if(fire[ny][nx]!=-1){
-                if(fire[ny][nx]<=escape[cur.second][cur.first]+1) continue;
+                if(fire[ny][nx]<=escape[cur.second][cur.first]+1) {
+                 //   cout<<"already fired ("<<nx<<","<<ny<<")\n";
+                    continue;
+                }
             }
             escape[ny][nx]=escape[cur.second][cur.first]+1;
-            printf("visiting (%d,%d), pos %d fire %d\n",nx,ny,escape[ny][nx],fire[ny][nx]);
+          //  cout<<"visiting ("<<nx<<","<<ny<<")pos "<<escape[ny][nx]<<" fire "<<fire[ny][nx]<<"\n";
+
             if(nx==c-1 || ny==r-1 || nx==0 || ny==0) {
                 isEscaped=true;
                minTime = escape[ny][nx];
                cout<<minTime+1;
+               
                return 0;
             }
             Q.push(make_pair(nx,ny));
