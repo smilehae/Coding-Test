@@ -39,9 +39,9 @@ int main(){
     Q.push(n);
     while(!Q.empty()){
         int cur = Q.front(); Q.pop();
-        //cout<<"poped "<<cur<<" distance "<<board[cur]<<"\n";
+       // cout<<"poped "<<cur<<" distance "<<board[cur]<<"\n";
         int dx = cur+1;
-        if(dx>0 && dx<100001){
+        if(dx>=0 && dx<100001){
             if(board[dx]==-1){
                 if(dx==k){
                     cout<<board[cur]+1;
@@ -49,13 +49,13 @@ int main(){
                 }
                 board[dx]=board[cur]+1;
                 Q.push(dx);
-               // cout<<"visiting "<<dx<<" distance "<<board[dx]<<"\n";
+              // cout<<"visiting "<<dx<<" distance "<<board[dx]<<"\n";
                
             }
         }
 
         dx = cur-1;
-        if(dx>0 && dx<100001){
+        if(dx>=0 && dx<100001){
             if(board[dx]==-1){
                  if(dx==k){
                     cout<<board[cur]+1;
@@ -63,13 +63,13 @@ int main(){
                 }
                 board[dx]=board[cur]+1;
                 Q.push(dx);
-              //  cout<<"visiting "<<dx<<" distance "<<board[dx]<<"\n";
+             //cout<<"visiting "<<dx<<" distance "<<board[dx]<<"\n";
                 
             }
         }
 
         dx = cur*2;
-        if(dx>0 && dx<100001){
+        if(dx>=0 && dx<100001){
             if(board[dx]==-1){
                  if(dx==k){
                     cout<<board[cur]+1;
@@ -77,7 +77,7 @@ int main(){
                 }
                 board[dx]=board[cur]+1;
                 Q.push(dx);
-                 //cout<<"visiting "<<dx<<" distance "<<board[dx]<<"\n";
+               // cout<<"visiting "<<dx<<" distance "<<board[dx]<<"\n";
 
             }
         }
