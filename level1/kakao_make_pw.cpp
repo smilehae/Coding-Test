@@ -12,14 +12,14 @@ string solution(string new_id) {
 
 
     for(string::iterator it=new_id.begin();it!=new_id.end();it++){
+        //1단계. 대문자를 소문자로.
         if(*it>='A' && *it <='Z'){
             *it += ('a'-'A');
         }
 
-          if(*it<'a' || *it>'z'){
-            //cout<<"it's not alphabet\n";
+        //2단계. 특수문자 없애기
+        if(*it<'a' || *it>'z'){
             if(*it<'0' || *it>'9'){
-              //  cout<<"it's not number\n";
                 if(*it!='-' && *it!='_' &&*it!='.'){
                     cout<<"found it. erase\n";
                     //erase하면 바로 뒤로 iterator로 넘어가므로, it--를 해서 막는다.
@@ -54,33 +54,45 @@ string solution(string new_id) {
         }
 
     }
+    cout<<"level 3 : "<<new_id<<"\n";
 
 
+//4단계  : 마침표 제거
     if(new_id[0]=='.'){
         new_id.erase(0,1);
     }
 
-
-    
-    while(new_id[new_id.size()-1]=='.'){
+    if(new_id[new_id.size()-1]=='.'){
         cout<<"erasing .\n";
         new_id.erase(new_id.size()-1,1);
     }
 
+    cout<<"level 4 : "<<new_id<<"\n";
+
     if(new_id=="") new_id="a";
 
 
+
+    cout<<"id is "<<new_id<<"\n";
+
+    new_id = new_id.substr(0,15);
+
+    if(new_id[new_id.size()-1]=='.'){
+        new_id.erase(new_id.size()-1,1);
+    }
+
+    cout<<"level 6 : "<<new_id<<"\n";
+
+    
     if(new_id.size()<=2){
         while(new_id.size()<3){
             new_id.insert(new_id.end(),new_id[new_id.size()-1]);
         }
 
     }
+    cout<<"level 7 : "<<new_id<<"\n";
 
-    cout<<"id is "<<new_id<<"\n";
-
-
-    answer = new_id.substr(0,16);
+    answer = new_id;
     return answer;
 }
 
