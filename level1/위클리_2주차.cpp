@@ -24,58 +24,39 @@ string giveRank(int num){
 
 string solution(vector<vector<int>> scores) {
     string answer = "";
-    int max=0;
-    int min=-1;
-    int scoresFinal[10]={0};
-    int sizeOfEach[10]={0};
-    bool isOnlyMax = true;
-    bool isOnlyMin = true;
-    vector<int> total(scores.size(),0);
     
     for(int i=0;i<scores.size();i++){
-        max=0;
-        min=101;
+        int max=0;
+        int min=101;
+        int sum=0;
+
         for(int j=0;j<scores[i].size();j++){
-            cout<<scores[j][i]<<" ";
+            //scores[i][i]는 아래에서 따로 판단할 예정.
+            if(i==j) continue;
+
             if(scores[j][i]>max){
-                isOnlyMax = true;
-                 max = scores[j][i];
+                max = scores[j][i];
             }
-            else if(scores[j][i]==max){
-                isOnlyMax = false;
+        
+            if(scores[j][i]<min){
+                min = scores[j][i];
             }
-             if(scores[j][i]<min){
-                isOnlyMin = true;
-                 min = scores[j][i];
-            }
-            else if(scores[j][i]==min){
-                isOnlyMin = false;
-            }
-            scoresFinal[j] = scores[j][i];
+           
+            sum += scores[j][i];
+        
         }
-        cout<<"max : "<<max<<" min : "<<min<<"\n";
-        for(int k=0;k<scores[i].size();k++){
-            cout<<scoresFinal[k]<<" ";
-            if(scoresFinal[k]==max && max==scores[i][i]&&isOnlyMax || scoresFinal[k]==min &&min==scores[i][i]&&isOnlyMin ){
-                cout<<"self giving high~ low\n";
-                continue;
-            }
-            total[i]+=scoresFinal[k];
-            sizeOfEach[i]++;
-            cout<<"adding "<<scoresFinal[k]<<" total became "<<total[i]<<"\n";
+        //조건에서, scores[i][i]가 유일한 큰거 또는 유일한 작은거면 제외 : 기존 작은거보다 작거나 기존 큰거보다 큰 경우면 제외
+        if(scores[i][i]>max || scores[i][i]<min){
+            sum = sum/(scores.size()-1);
         }
-        cout<<"\n";
+        else{
+            sum += scores[i][i];
+            sum = sum / (scores.size());
+        }
+        answer += giveRank(sum);
     }
    
-    
-    for(int i=0;i<scores.size();i++){
-        cout<<total[i]<<"/";
-        cout<<sizeOfEach[i]<<"=";
-        cout<<giveRank(total[i]/sizeOfEach[i]);
-        cout<<"("<<giveRank(total[i]/sizeOfEach[i])<<")\n";
-        answer+=giveRank(total[i]/sizeOfEach[i]);
-    }
-    
+
     
     return answer;
 }
