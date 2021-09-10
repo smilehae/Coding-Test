@@ -5,12 +5,13 @@
 #include <algorithm>
 #include <string>
 #include <sstream>
+#include <map>
 using namespace std;
 
 
 int main() {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
-    vector<pair<string,pair<string,string>>>tags;
+    vector<pair<string,pair<string,string>>> myTag;
     int n,q;
     string str,tag,attr,value,dummy;
     string tagNum="";
@@ -34,7 +35,7 @@ int main() {
                     value.erase(value.size()-1,value.size());
                 }
                 cout<<attr<<" = "<<value<<"\n";
-                tags.push_back(make_pair(tagNum,make_pair(attr,value)));
+                myTag.push_back(make_pair(tagNum,make_pair(attr,value)));
                 cout<<"putting tag"<<tagNum<<" "<<attr<<" = "<<value<<"\n";
             }
         }
@@ -48,12 +49,28 @@ int main() {
     } 
 
     cout<<"showing vectors...\n";
-    for(int i=0;i<tags.size();i++){
-        cout<<"tag "<<tags[i].first<<" "<<tags[i].second.first<<" = "<<tags[i].second.second<<"\n";
+    for(vector<pair<string,pair<string,string>>>::iterator it=myTag.begin();it!=myTag.end();it++){
+        cout<<"tag"<<it->first<<" "<<it->second.first<<" = "<<it->second.second<<"\n";
     }
 
+//지금 생각한 대로 하면, 11번 태그 -> 2번 태그랑 1번 태그 -> 12번 태그랑 구별이 안된다. 구별하려면 , 를 넣거나 추가 조치를 해야 할 것 같은데.. 일단 보자
     for(int i=0;i<q;i++){
-        getline(cin,str);
+        string str;
+        string tagNum = "";
+        cin>>str;
+        for(char elem : str){
+            if(elem >= '0' && elem <='9'){
+                //cout<<elem<<" ";
+                tagNum+=elem;
+                // if(myTag.find(tagNum)==myTag.end()){
+                //     cout<<"Not Found!\n";
+                // }
+                // else{
+                //     myTag[tagNum]
+                // }
+            }
+        }
+        
     }
     return 0;
 }
