@@ -11,6 +11,7 @@ int solution(string s) {
     while(divider <= s.size()/2){
         cout<<"when divider is "<<divider<<"size is "<<s.size()<<"there is"<<s.size()/divider<<"\n";
         for(int i=0;i<s.size();i+=divider){
+            if()
             cout<<"i is "<<i<<"\n";
         }
         divider++;
