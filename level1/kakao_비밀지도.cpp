@@ -9,6 +9,13 @@ using namespace std;
 
 //이진수로 바꾸기
 string convertTo2(int num, int n){
+    if(num==0){
+        string str="";
+        for(int i=0;i<n;i++){
+            str+="0";
+        }
+        return str;
+    }
     string str="";
     int lengthNum = (int)log2(num)+1;
        
@@ -41,7 +48,7 @@ vector<string> solution(int n, vector<int> arr1, vector<int> arr2) {
             if(answer[i][j]=='0')  answer[i][j]=' ';
             else answer[i][j]='#';
         }
-        cout<<answer[i]<<"\n";
+        // cout<<answer[i]<<"\n";
     }
     return answer;
 }
