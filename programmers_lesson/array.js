@@ -45,6 +45,11 @@ const arr = [1, 2, 3, 4, 5];
 // arr.splice(2, 2);
 // console.log(arr);
 
-for (let i = 0; i < 6; i++) {
-  console.log(arr[i]);
-}
+// 순회
+// for (let i = 0; i < 6; i++) {
+//   console.log(arr[i]);
+// }
+
+// for (const item of arr) {
+//   console.log(item);
+// }
