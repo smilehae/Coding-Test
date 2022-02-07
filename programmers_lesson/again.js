@@ -53,13 +53,11 @@ class SinglyLinkedList {
     this.tail = null;
   }
   find(value) {
-    if (this.head === null) return null;
     let currNode = this.head;
-    while (currNode.next !== null) {
-      if (currNode.value === value) return currNode;
+    while (currNode && currNode.value !== value) {
       currNode = currNode.next;
     }
-    return null;
+    return currNode;
   }
   append(value) {
     const newNode = new Node(value);
@@ -73,10 +71,12 @@ class SinglyLinkedList {
   }
   display() {
     let currNode = this.head;
+    let displayString = "";
     while (currNode !== null) {
-      console.log(currNode.value + "->");
+      displayString += `${currNode.value} -> `;
       currNode = currNode.next;
     }
+    console.log(displayString);
   }
   remove(value) {
     //바로 헤드일 경우, 제거하고 해드를 변경
@@ -84,10 +84,11 @@ class SinglyLinkedList {
       this.head = this.head.next;
     } else {
       let prevNode = this.head;
-      while (prevNode.next.next !== null) {
+      while (prevNode.next) {
         if (prevNode.next.value === value) {
-          prev;
+          prevNode.next = prevNode.next.next;
         }
+        prevNode = prevNode.next;
       }
     }
   }
@@ -100,9 +101,12 @@ class SinglyLinkedList {
 
 const linkedList = new SinglyLinkedList();
 linkedList.append(1);
+linkedList.append(2);
 linkedList.append(3);
 linkedList.append(5);
-linkedList.append(7);
-linkedList.insert(linkedList.find(3), 2);
-linkedList.remove(1);
+linkedList.display();
+console.log(linkedList.find(3));
+linkedList.remove(3);
+linkedList.display();
+linkedList.insert(linkedList.find(2), 10);
 linkedList.display();
