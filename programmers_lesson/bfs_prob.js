@@ -1,4 +1,6 @@
 function solution(n, vertex) {
+  //graph를 만들때, C++에서 무조건 2차원 배열 만들었던 것에 반해 여기선 1차원 배열 + 각자 Array로 인접한 갑만 가져오도록 만듦!
+
   const graph = Array.from(Array(n + 1), () => []);
   const distance = Array(n + 1).fill(0);
 
